@@ -1,12 +1,12 @@
-const {createContext} = require('react');
+const {createContext, useContext} = require('react');
 
-const stateContext = createContext(null);
-const dispatch = createContext(null);
+export const StoreStateContext = createContext(null);
+export const StoreDispatchContext = createContext(null);
 
 export const useOliveStore = () => {
-  return stateContext;
+  return useContext(StoreStateContext);
 };
 
-export const useOliveActions = () => {
-  return dispatch;
+export const useOliveDispatch = () => {
+  return useContext(StoreDispatchContext);
 };

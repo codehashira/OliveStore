@@ -1,5 +1,7 @@
 import {Dimensions} from 'react-native';
 
+// Snippet copied from https://github.com/nirsky/react-native-size-matters
+
 const {width, height} = Dimensions.get('window');
 const [shortDimension, longDimension] =
   width < height ? [width, height] : [height, width];

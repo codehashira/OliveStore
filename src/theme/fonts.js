@@ -1,6 +1,6 @@
 import {fontScale} from '../utils/scaling';
 
-const FONT_FAMILY = {
+export const FONT_FAMILY = {
   EXTRA_LIGHT: 'Sora-ExtraLight',
   LIGHT: 'Sora-Light',
   THIN: 'Sora-Thin',

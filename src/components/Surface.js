@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     paddingTop: StatusBar.currentHeight,
     flex: 1,
     backgroundColor: '#fbfdf8',
+    paddingHorizontal: 16,
   },
 });
 
