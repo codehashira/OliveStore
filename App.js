@@ -18,7 +18,13 @@ const App = () => {
     const getStoreAsync = async () => {
       const [result, error] = await getAllProducts();
       if (result) {
-        dispatch(loadOliveStore(result));
+        const mappedArray = result.map(item => {
+          return {
+            ...item,
+            discount: Math.floor(Math.random() * 30) + 5,
+          };
+        });
+        dispatch(loadOliveStore(mappedArray));
       } else {
         console.log(error);
       }

@@ -1,14 +1,10 @@
-import {
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  ImageBackground,
-} from 'react-native';
+import {TouchableOpacity, StyleSheet, ImageBackground} from 'react-native';
 import React from 'react';
-import {FONT} from '../theme/fonts';
+import Text from './Text';
 
 const styles = StyleSheet.create({
   categoryCard: {
+    width: '48%',
     borderWidth: 1,
     borderColor: '#e1e3de',
     justifyContent: 'center',
@@ -31,7 +27,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const CategoryCard = ({category, title, onPress}) => {
+const CategoryCard = ({image, title, onPress}) => {
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -39,10 +35,12 @@ const CategoryCard = ({category, title, onPress}) => {
       activeOpacity={0.7}>
       <ImageBackground
         source={{
-          uri: 'https://images.pexels.com/photos/163100/circuit-circuit-board-resistor-computer-163100.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          uri: image,
         }}
         style={styles.categoryImage}>
-        <Text style={[FONT.titleLarge, styles.categoryTitle]}>{title}</Text>
+        <Text variant={'labelLarge'} style={styles.categoryTitle}>
+          {title}
+        </Text>
       </ImageBackground>
     </TouchableOpacity>
   );

@@ -5,12 +5,20 @@ import {
   ScrollView,
   ActivityIndicator,
   StyleSheet,
+  FlatList,
 } from 'react-native';
 import Surface from '../components/Surface';
 import Header from '../components/Header';
 import CategoryCard from '../components/CategoryCard';
 import {useOliveStore, useOliveDispatch} from '../context/context';
 import {COLORS} from '../theme/colors';
+
+const images = [
+  'https://images.pexels.com/photos/6311670/pexels-photo-6311670.jpeg?auto=compress&cs=tinysrgb&w=600',
+  'https://images.pexels.com/photos/1191531/pexels-photo-1191531.jpeg?auto=compress&cs=tinysrgb&w=600',
+  'https://images.pexels.com/photos/62689/pexels-photo-62689.jpeg?auto=compress&cs=tinysrgb&w=600',
+  'https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=600',
+];
 
 const styles = StyleSheet.create({
   homeMain: {flex: 1},
@@ -30,19 +38,24 @@ const Home = ({navigation, route}) => {
   return (
     <Surface>
       <View style={styles.homeMain}>
-        <Header title={'Olive Store'} />
+        <Header title={'Olive Store'} enableSearch={true} />
         {state.data.length > 0 ? (
-          <ScrollView>
-            {state.categories.map((item, index) => (
+          <FlatList
+            data={state.categories}
+            keyExtractor={item => item}
+            renderItem={({item, index}) => (
               <CategoryCard
-                key={index}
+                image={images[index]}
                 title={item}
                 onPress={() => {
                   handleOnPress(item);
                 }}
               />
-            ))}
-          </ScrollView>
+            )}
+            numColumns={2}
+            columnWrapperStyle={{justifyContent: 'space-between'}}
+            contentContainerStyle={{paddingHorizontal: 16}}
+          />
         ) : (
           <View style={styles.loadingView}>
             <ActivityIndicator

@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   bagProductPrice: {color: 'black'},
 });
 
-const BagProductItem = ({id, image, title, price, handleRemove}) => {
+const BagProductItem = ({id, image, title, price, handleRemove, size}) => {
   return (
     <View style={styles.bagProductCardMain}>
       <Image
@@ -36,7 +36,12 @@ const BagProductItem = ({id, image, title, price, handleRemove}) => {
           numberOfLines={3}>
           {title}
         </Text>
-        <Text style={[FONT.titleMedium, styles.bagProductPrice]}>{price}</Text>
+        <Text style={[FONT.titleMedium, styles.bagProductPrice]}>
+          $ {price}
+        </Text>
+        <Text style={[FONT.labelSmall, styles.bagProductPrice]}>
+          Size {size}
+        </Text>
       </View>
       <TouchableOpacity
         onPress={() => {

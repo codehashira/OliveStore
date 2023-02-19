@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, ScrollView, StyleSheet} from 'react-native';
 import Surface from '../components/Surface';
 import Header from '../components/Header';
-import {FONT} from '../theme/fonts';
+import {FONT, FONT_FAMILY} from '../theme/fonts';
 import BagProductItem from '../components/BagProductCard';
 import {PrimaryButton} from '../components/Button';
 import {useOliveDispatch, useOliveStore} from '../context/context';
@@ -31,8 +31,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 8,
   },
-  bagIndividualPriceTitle: {color: 'black'},
-  bagIndividualPriceValue: {color: 'black'},
+  bagIndividualPriceTitle: {color: 'black', fontSize: 10},
+  bagIndividualPriceValue: {color: 'black', fontSize: 10},
   bagTotalPriceView: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -47,6 +47,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderTopWidth: 1,
     borderColor: '#eaede6',
+    paddingHorizontal: 16,
+    backgroundColor: 'white',
   },
 });
 
@@ -55,7 +57,7 @@ const Bag = ({navigation, route}) => {
   const dispatch = useOliveDispatch();
   const {bag} = state;
 
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [bagPrice, setBagPrice] = useState(0);
   const [convenience, setConvenience] = useState(12);
 
   const handleRemove = productId => {
@@ -63,14 +65,14 @@ const Bag = ({navigation, route}) => {
   };
 
   useEffect(() => {
-    const totalCost = bag.reduce((total, item) => total + item.price, 0);
-    setTotalPrice(totalCost);
+    const bagTotalPrice = bag.reduce((total, item) => total + item.price, 0);
+    setBagPrice(bagTotalPrice);
   }, [bag]);
 
   return (
     <Surface>
       <View style={styles.bagViewMain}>
-        <Header showBackButton={true} showBagButton={false} />
+        <Header showBackButton={true} showBagButton={false} title={'Bag'} />
         {bag.length === 0 ? (
           <View>
             <Text style={[FONT.bodyMedium, styles.bagTitle]}>
@@ -79,17 +81,17 @@ const Bag = ({navigation, route}) => {
           </View>
         ) : (
           <>
-            <View style={styles.bagTitleView}>
-              <Text style={[FONT.bodyMedium, styles.bagTitle]}>Bag</Text>
-              <Text style={[FONT.bodyMedium, styles.bagTitleProducts]}>{`(${
-                bag.length === 1 ? '1 Product' : `${bag.length} products`
-              })`}</Text>
-            </View>
-            <ScrollView style={styles.bagScrollView}>
-              {bag.map(item => (
-                <BagProductItem {...item} handleRemove={handleRemove} />
-              ))}
-              <>
+            <View style={{flex: 1, paddingHorizontal: 16}}>
+              <View style={styles.bagTitleView}>
+                <Text style={[FONT.bodyMedium, styles.bagTitleProducts]}>{`${
+                  bag.length === 1 ? '1 Product' : `${bag.length} products`
+                }`}</Text>
+              </View>
+              <ScrollView style={styles.bagScrollView}>
+                {bag.map(item => (
+                  <BagProductItem {...item} handleRemove={handleRemove} />
+                ))}
+
                 <Text style={[FONT.bodyMedium, styles.bagPriceDetailsTitle]}>
                   Price Details
                   {`  (${bag.length === 1 ? '1 item' : `${bag.length} items`})`}
@@ -97,20 +99,20 @@ const Bag = ({navigation, route}) => {
                 <View style={styles.bagPriceDetails}>
                   <View style={styles.bagIndividualPriceDetails}>
                     <Text
-                      style={[FONT.labelSmall, styles.bagIndividualPriceTitle]}>
-                      Total MRP
+                      style={[FONT.bodySmall, styles.bagIndividualPriceTitle]}>
+                      Bag Total
                     </Text>
                     <Text
                       style={[
                         FONT.labelMedium,
                         styles.bagIndividualPriceTitle,
                       ]}>
-                      $ {totalPrice}
+                      $ {bagPrice}
                     </Text>
                   </View>
                   <View style={styles.bagIndividualPriceDetails}>
                     <Text
-                      style={[FONT.labelSmall, styles.bagIndividualPriceTitle]}>
+                      style={[FONT.bodySmall, styles.bagIndividualPriceValue]}>
                       Convenience Fee
                     </Text>
                     <Text
@@ -124,23 +126,23 @@ const Bag = ({navigation, route}) => {
                   <View style={styles.bagTotalPriceView}>
                     <Text
                       style={[FONT.labelSmall, styles.bagIndividualPriceTitle]}>
-                      Total MRP
+                      Total Amount
                     </Text>
                     <Text
                       style={[
                         FONT.labelMedium,
                         styles.bagIndividualPriceTitle,
                       ]}>
-                      $ {totalPrice + convenience}
+                      $ {bagPrice + convenience}
                     </Text>
                   </View>
                 </View>
-              </>
-            </ScrollView>
+              </ScrollView>
+            </View>
             <View style={styles.bagCheckoutView}>
               <View>
                 <Text style={[FONT.bodyMedium, {color: 'black'}]}>
-                  $ {totalPrice + convenience}
+                  $ {bagPrice + convenience}
                 </Text>
                 <Text style={[FONT.labelSmall, {color: 'gray'}]}>Total</Text>
               </View>
