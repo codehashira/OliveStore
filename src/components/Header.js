@@ -53,7 +53,7 @@ export default function Header({
           <FeatherIcon
             name="arrow-left"
             size={20}
-            color={COLORS.PRIMARY}
+            color={COLORS.primary}
             onPress={handleBackPress}
             style={{marginTop: 4, marginRight: 8, marginLeft: -4}}
           />
@@ -61,7 +61,7 @@ export default function Header({
         <Text
           style={[
             FONT.titleMedium,
-            {color: COLORS.BLACK, textTransform: 'capitalize'},
+            {color: COLORS.onBackground, textTransform: 'capitalize'},
           ]}>
           {title ? title : ''}
         </Text>

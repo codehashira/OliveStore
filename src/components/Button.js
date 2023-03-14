@@ -1,11 +1,18 @@
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {
+  View,
+  Text as NativeText,
+  TouchableOpacity,
+  StyleSheet,
+  Pressable,
+} from 'react-native';
 import React from 'react';
 import {FONT, FONT_FAMILY} from '../theme/fonts';
 import {COLORS} from '../theme/colors';
+import Text from './Text';
 
 const styles = StyleSheet.create({
   primaryButton: {
-    backgroundColor: COLORS.PRIMARY,
+    backgroundColor: COLORS.primary,
     marginVertical: 16,
     padding: 16,
     alignItems: 'center',
@@ -18,8 +25,9 @@ const styles = StyleSheet.create({
     fontFamily: FONT_FAMILY.BOLD,
   },
   radioButton: {
+    alignSelf: 'flex-start',
     height: 24,
-    width: 48,
+    minWidth: 48,
     backgroundColor: 'white',
     marginVertical: 16,
     alignItems: 'center',
@@ -31,12 +39,19 @@ const styles = StyleSheet.create({
     color: 'black',
     fontFamily: FONT_FAMILY.BOLD,
   },
+  textButton: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 8,
+  },
+  textButtonTitle: {color: '#0d1f13'},
 });
 
 export function Button() {
   return (
     <View>
-      <Text>Button</Text>
+      <NativeText>Button</NativeText>
     </View>
   );
 }
@@ -61,32 +76,44 @@ export const IconButton = ({children, onPress, style = {}}) => {
 
 export const PrimaryButton = ({title, onPress}) => {
   return (
-    <TouchableOpacity
+    <Pressable
+      android_ripple={{color: '#98f7b5', borderless: false}}
       onPress={onPress}
       activeOpacity={0.9}
       style={styles.primaryButton}>
-      <Text style={[FONT.bodyMedium, styles.primaryButtonTitle]}>{title}</Text>
-    </TouchableOpacity>
+      <NativeText style={[FONT.bodyMedium, styles.primaryButtonTitle]}>
+        {title}
+      </NativeText>
+    </Pressable>
   );
 };
 
-export const RadioButton = ({value, onPress, selected}) => {
+export const RadioButton = ({value, onPress, selected, style = {}}) => {
   return (
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={0.7}
       style={[
         styles.radioButton,
-        selected ? {backgroundColor: COLORS.BLACK} : {},
+        selected ? {backgroundColor: COLORS.onBackground} : {},
+        style,
       ]}>
-      <Text
+      <NativeText
         style={[
           FONT.labelSmall,
           styles.radioButtonTitle,
           selected ? {color: 'white'} : {},
         ]}>
         {value}
-      </Text>
+      </NativeText>
     </TouchableOpacity>
   );
 };
+
+export const TextButton = ({onPress, title, buttonStyle, titleStyle}) => (
+  <Pressable onPress={onPress} style={[styles.textButton, buttonStyle]}>
+    <Text variant={'bodySmall'} style={[styles.textButtonTitle, titleStyle]}>
+      {title}
+    </Text>
+  </Pressable>
+);

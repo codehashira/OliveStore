@@ -1,5 +1,5 @@
 import {View, TextInput, StyleSheet} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Surface from '../components/Surface';
 import {useOliveStore} from '../context/context';
 import Text from '../components/Text';
@@ -41,7 +41,7 @@ export default function Search({navigation, route}) {
     }
   };
 
-  const onFinishTypingDelay = debounce(onFinishTyping, 2000);
+  const onFinishTypingDelay = debounce(onFinishTyping, 3000);
 
   const onBackPress = () => {
     navigation.goBack();
@@ -54,7 +54,7 @@ export default function Search({navigation, route}) {
           <FeatherIcon
             name="arrow-left"
             size={20}
-            color={COLORS.PRIMARY}
+            color={COLORS.primary}
             onPress={onBackPress}
             style={{marginTop: 4, marginRight: 8, marginLeft: -4}}
           />

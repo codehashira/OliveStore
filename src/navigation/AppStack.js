@@ -6,6 +6,8 @@ import List from '../screens/List';
 import Product from '../screens/Product';
 import Bag from '../screens/Bag';
 import Search from '../screens/Search';
+import Address from '../screens/address/Address';
+import BottomTabs from './BottomTabs';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,7 +35,7 @@ const AppStack = () => {
         headerShown: false,
       }}
       initialRouteName="Home">
-      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Home" component={BottomTabs} />
       <Stack.Screen
         name="List"
         component={List}
@@ -52,6 +54,11 @@ const AppStack = () => {
       <Stack.Screen
         name="Search"
         component={Search}
+        options={{cardStyleInterpolator: forFade}}
+      />
+      <Stack.Screen
+        name="Address"
+        component={Address}
         options={{cardStyleInterpolator: forFade}}
       />
     </Stack.Navigator>

@@ -61,7 +61,7 @@ const Home = ({navigation, route}) => {
             <ActivityIndicator
               loading={true}
               size={48}
-              color={COLORS.PRIMARY}
+              color={COLORS.primary}
             />
           </View>
         )}

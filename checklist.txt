@@ -1,0 +1,4 @@
+1. remove inline styles
+2. standardized buttons 
+3. standardized units  - DONE - 
+4. Address Screen

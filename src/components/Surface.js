@@ -11,8 +11,8 @@ const styles = StyleSheet.create({
   },
 });
 
-const Surface = ({children}) => {
-  return <View style={styles.surface}>{children}</View>;
+const Surface = ({children, style}) => {
+  return <View style={[styles.surface, style]}>{children}</View>;
 };
 
 export default Surface;
